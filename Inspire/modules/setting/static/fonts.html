@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>IconFont</title>
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<style type="text/css">
+*{margin: 0;padding: 0;list-style: none;}
+/*
+KISSY CSS Reset
+理念：1. reset 的目的不是清除浏览器的默认样式，这仅是部分工作。清除和重置是紧密不可分的。
+2. reset 的目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题。
+3. reset 期望提供一套普适通用的基础样式。但没有银弹，推荐根据具体需求，裁剪和修改后再使用。
+特色：1. 适应中文；2. 基于最新主流浏览器。
+维护：玉伯<lifesinger@gmail.com>, 正淳<ragecarrier@gmail.com>
+ */
+
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+  margin: 0;
+  padding: 0;
+}
+
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ {
+  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+  background: transparent;
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+
+/** 重置文本格式元素 **/
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/** 重置表单元素 **/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* 清除浮动 */
+.ks-clear:after, .clear:after {
+  content: '\20';
+  display: block;
+  height: 0;
+  clear: both;
+}
+.ks-clear, .clear {
+  *zoom: 1;
+}
+
+.main {
+  width: auto;
+  margin: 0 auto;
+}
+.main h1{font-size:36px; color:#333; text-align:left;margin-bottom:30px; border-bottom: 1px solid #eee;}
+
+.helps{margin-top:40px;}
+.helps pre{
+  padding:20px;
+  margin:10px 0;
+  border:solid 1px #e7e1cd;
+  background-color: #fffdef;
+  overflow: auto;
+}
+
+.icon_lists{
+  width: 100% !important;
+}
+
+.icon_lists li{
+  float:left;
+  width: 100px;
+  height:140px;
+  text-align: center;
+  list-style: none !important;
+}
+.icon_lists .icon{
+  font-size: 28px;
+  line-height: 20px;
+  margin: 10px 0;
+  color: #444;
+  -webkit-transition: font-size 0.25s ease-out 0s;
+  -moz-transition: font-size 0.25s ease-out 0s;
+  transition: font-size 0.25s ease-out 0s;
+
+}
+.icon_lists .icon:hover{
+  font-size: 50px;
+}
+
+.icon_lists .name {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+}
+
+.icon_lists .name,
+.icon_lists .fontclass {
+  font-size: 13px;
+}
+
+.markdown {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+.highlight {
+  line-height: 1.5;
+}
+
+.markdown img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.markdown h1 {
+  color: #404040;
+  font-weight: 500;
+  line-height: 40px;
+  margin-bottom: 24px;
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: #404040;
+  margin: 1.6em 0 0.6em 0;
+  font-weight: 500;
+  clear: both;
+}
+
+.markdown h1 {
+  font-size: 28px;
+}
+
+.markdown h2 {
+  font-size: 22px;
+}
+
+.markdown h3 {
+  font-size: 16px;
+}
+
+.markdown h4 {
+  font-size: 14px;
+}
+
+.markdown h5 {
+  font-size: 12px;
+}
+
+.markdown h6 {
+  font-size: 12px;
+}
+
+.markdown hr {
+  height: 1px;
+  border: 0;
+  background: #e9e9e9;
+  margin: 16px 0;
+  clear: both;
+}
+
+.markdown p,
+.markdown pre {
+  margin: 1em 0;
+}
+
+.markdown > p,
+.markdown > blockquote,
+.markdown > .highlight,
+.markdown > ol,
+.markdown > ul {
+  width: 80%;
+}
+
+.markdown ul > li {
+  list-style: circle;
+}
+
+.markdown > ul li,
+.markdown blockquote ul > li {
+  margin-left: 5px;
+  margin-top: 1.2em;
+  padding-left: 5px;
+}
+
+.markdown > ul li p,
+.markdown > ol li p {
+  margin: 0.6em 0;
+}
+
+.markdown ol > li {
+  list-style: decimal;
+}
+
+.markdown > ol li,
+.markdown blockquote ol > li {
+  margin-left: 20px;
+  padding-left: 4px;
+}
+
+.markdown code {
+  margin: 0 3px;
+  padding: 0 5px;
+  background: #eee;
+  border-radius: 3px;
+}
+
+.markdown pre {
+  border-radius: 6px;
+  background: #f7f7f7;
+  padding: 20px;
+}
+
+.markdown pre code {
+  border: none;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.markdown strong,
+.markdown b {
+  font-weight: 600;
+}
+
+.markdown > table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  empty-cells: show;
+  border: 1px solid #e9e9e9;
+  width: 95%;
+  margin-bottom: 24px;
+}
+
+.markdown > table th {
+  white-space: nowrap;
+  color: #333;
+  font-weight: 600;
+
+}
+
+.markdown > table th,
+.markdown > table td {
+  border: 1px solid #e9e9e9;
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.markdown > table th {
+  background: #F7F7F7;
+}
+
+.markdown blockquote {
+  font-size: 90%;
+  color: #999;
+  border-left: 4px solid #e9e9e9;
+  padding-left: 0.8em;
+  margin: 1em 0;
+  font-style: italic;
+}
+
+.markdown blockquote p {
+  margin: 0;
+}
+
+.markdown .anchor {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-left: 8px;
+}
+
+.markdown .waiting {
+  color: #ccc;
+}
+
+.markdown h1:hover .anchor,
+.markdown h2:hover .anchor,
+.markdown h3:hover .anchor,
+.markdown h4:hover .anchor,
+.markdown h5:hover .anchor,
+.markdown h6:hover .anchor {
+  opacity: 1;
+  display: inline-block;
+}
+
+.markdown > br,
+.markdown > p > br {
+  clear: both;
+}
+
+
+.hljs {
+  display: block;
+  background: white;
+  padding: 0.5em;
+  color: #333333;
+  overflow-x: auto;
+}
+
+.hljs-comment,
+.hljs-meta {
+  color: #969896;
+}
+
+.hljs-string,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-strong,
+.hljs-emphasis,
+.hljs-quote {
+  color: #df5000;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type {
+  color: #a71d5d;
+}
+
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute {
+  color: #0086b3;
+}
+
+.hljs-section,
+.hljs-name {
+  color: #63a35c;
+}
+
+.hljs-tag {
+  color: #333333;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #795da3;
+}
+
+.hljs-addition {
+  color: #55a532;
+  background-color: #eaffea;
+}
+
+.hljs-deletion {
+  color: #bd2c00;
+  background-color: #ffecec;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+pre{
+  background: #fff;
+}
+</style>   
+</head>
+<body>
+    <div class="main markdown">
+        <ul class="icon_lists clear">
+            
+            <li>
+                <i class="icon icon louie-cog"></i>
+                    <div class="name">cog</div>
+                    <div class="fontclass">.louie-cog</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-link"></i>
+                    <div class="name">link</div>
+                    <div class="fontclass">.louie-link</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-more"></i>
+                    <div class="name">more</div>
+                    <div class="fontclass">.louie-more</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-qq"></i>
+                    <div class="name">qq</div>
+                    <div class="fontclass">.louie-qq</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-music-lsit"></i>
+                    <div class="name">music-list</div>
+                    <div class="fontclass">.louie-music-lsit</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-down-o"></i>
+                    <div class="name">down</div>
+                    <div class="fontclass">.louie-down-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-list"></i>
+                    <div class="name">list</div>
+                    <div class="fontclass">.louie-list</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-tags-o"></i>
+                    <div class="name">tags</div>
+                    <div class="fontclass">.louie-tags-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-xie"></i>
+                    <div class="name">write</div>
+                    <div class="fontclass">.louie-xie</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-wechat"></i>
+                    <div class="name">wechat</div>
+                    <div class="fontclass">.louie-wechat</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-up"></i>
+                    <div class="name">up</div>
+                    <div class="fontclass">.louie-up</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-share-o"></i>
+                    <div class="name">share</div>
+                    <div class="fontclass">.louie-share-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-back"></i>
+                    <div class="name">back</div>
+                    <div class="fontclass">.louie-back</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-camera"></i>
+                    <div class="name">camera</div>
+                    <div class="fontclass">.louie-camera</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-github"></i>
+                    <div class="name">github</div>
+                    <div class="fontclass">.louie-github</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-tags"></i>
+                    <div class="name">tags</div>
+                    <div class="fontclass">.louie-tags</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-location"></i>
+                    <div class="name">location</div>
+                    <div class="fontclass">.louie-location</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-noticenew"></i>
+                    <div class="name">tsb_notice_new</div>
+                    <div class="fontclass">.louie-noticenew</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-login"></i>
+                    <div class="name">login_password</div>
+                    <div class="fontclass">.louie-login</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-trend"></i>
+                    <div class="name">trend</div>
+                    <div class="fontclass">.louie-trend</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-download"></i>
+                    <div class="name">download</div>
+                    <div class="fontclass">.louie-download</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-sure-location"></i>
+                    <div class="name">sure-location-icon</div>
+                    <div class="fontclass">.louie-sure-location</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-games"></i>
+                    <div class="name">game</div>
+                    <div class="fontclass">.louie-games</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-share"></i>
+                    <div class="name">share</div>
+                    <div class="fontclass">.louie-share</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-search"></i>
+                    <div class="name">Search</div>
+                    <div class="fontclass">.louie-search</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-qzone"></i>
+                    <div class="name">qzone</div>
+                    <div class="fontclass">.louie-qzone</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-pc6"></i>
+                    <div class="name">pc6</div>
+                    <div class="fontclass">.louie-pc6</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-smiling"></i>
+                    <div class="name">smiling36</div>
+                    <div class="fontclass">.louie-smiling</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-home"></i>
+                    <div class="name">home_home</div>
+                    <div class="fontclass">.louie-home</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-msg"></i>
+                    <div class="name">dynamic-active</div>
+                    <div class="fontclass">.louie-msg</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-comment"></i>
+                    <div class="name">comment</div>
+                    <div class="fontclass">.louie-comment</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-archives"></i>
+                    <div class="name">archives</div>
+                    <div class="fontclass">.louie-archives</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-weibo"></i>
+                    <div class="name">weibo</div>
+                    <div class="fontclass">.louie-weibo</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-link-o"></i>
+                    <div class="name">link</div>
+                    <div class="fontclass">.louie-link-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-youtube-o"></i>
+                    <div class="name">youtube</div>
+                    <div class="fontclass">.louie-youtube-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-game-o"></i>
+                    <div class="name">game</div>
+                    <div class="fontclass">.louie-game-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-friend"></i>
+                    <div class="name">icon-af-friend</div>
+                    <div class="fontclass">.louie-friend</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-down"></i>
+                    <div class="name">down</div>
+                    <div class="fontclass">.louie-down</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-folder"></i>
+                    <div class="name">folder</div>
+                    <div class="fontclass">.louie-folder</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-comment-o"></i>
+                    <div class="name">comment</div>
+                    <div class="fontclass">.louie-comment-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-facebook"></i>
+                    <div class="name">facebook</div>
+                    <div class="fontclass">.louie-facebook</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-friend-o-a"></i>
+                    <div class="name">search_friend</div>
+                    <div class="fontclass">.louie-friend-o-a</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-heart"></i>
+                    <div class="name">heart</div>
+                    <div class="fontclass">.louie-heart</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-message"></i>
+                    <div class="name">Message</div>
+                    <div class="fontclass">.louie-message</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-time"></i>
+                    <div class="name">time</div>
+                    <div class="fontclass">.louie-time</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-vip"></i>
+                    <div class="name">认证</div>
+                    <div class="fontclass">.louie-vip</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-friend-o-b"></i>
+                    <div class="name">friend</div>
+                    <div class="fontclass">.louie-friend-o-b</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-tag"></i>
+                    <div class="name">tag</div>
+                    <div class="fontclass">.louie-tag</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-icface"></i>
+                    <div class="name">ic_face</div>
+                    <div class="fontclass">.louie-icface</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-cosplay"></i>
+                    <div class="name">ic_cosplay</div>
+                    <div class="fontclass">.louie-cosplay</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-notice"></i>
+                    <div class="name">notice_hl</div>
+                    <div class="fontclass">.louie-notice</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-mail"></i>
+                    <div class="name">mail</div>
+                    <div class="fontclass">.louie-mail</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-time-o"></i>
+                    <div class="name">time</div>
+                    <div class="fontclass">.louie-time-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-friend-o-c"></i>
+                    <div class="name">tab_friend_filled</div>
+                    <div class="fontclass">.louie-friend-o-c</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-fire"></i>
+                    <div class="name">fire</div>
+                    <div class="fontclass">.louie-fire</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-user1"></i>
+                    <div class="name">user</div>
+                    <div class="fontclass">.louie-user1</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-wangyiyun"></i>
+                    <div class="name">wangyi_yunyinyue_music_1193417_easyicon.net</div>
+                    <div class="fontclass">.louie-wangyiyun</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-hot-o"></i>
+                    <div class="name">置顶</div>
+                    <div class="fontclass">.louie-hot-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-google"></i>
+                    <div class="name">google</div>
+                    <div class="fontclass">.louie-google</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-twitter"></i>
+                    <div class="name">twitter</div>
+                    <div class="fontclass">.louie-twitter</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-csdn"></i>
+                    <div class="name">CSDN</div>
+                    <div class="fontclass">.louie-csdn</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-tongzhi"></i>
+                    <div class="name">nav-notice</div>
+                    <div class="fontclass">.louie-tongzhi</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-smile"></i>
+                    <div class="name">笑脸</div>
+                    <div class="fontclass">.louie-smile</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-profile"></i>
+                    <div class="name">profile</div>
+                    <div class="fontclass">.louie-profile</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-game"></i>
+                    <div class="name">game</div>
+                    <div class="fontclass">.louie-game</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-back-o"></i>
+                    <div class="name">back</div>
+                    <div class="fontclass">.louie-back-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-fast-forward"></i>
+                    <div class="name">fast-forward</div>
+                    <div class="fontclass">.louie-fast-forward</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-pause"></i>
+                    <div class="name">pause</div>
+                    <div class="fontclass">.louie-pause</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-play"></i>
+                    <div class="name">play</div>
+                    <div class="fontclass">.louie-play</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-rewind"></i>
+                    <div class="name">rewind</div>
+                    <div class="fontclass">.louie-rewind</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-image"></i>
+                    <div class="name">Image-2</div>
+                    <div class="fontclass">.louie-image</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-images"></i>
+                    <div class="name">pic</div>
+                    <div class="fontclass">.louie-images</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-send"></i>
+                    <div class="name">send</div>
+                    <div class="fontclass">.louie-send</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-camera-o"></i>
+                    <div class="name">camera</div>
+                    <div class="fontclass">.louie-camera-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-eye"></i>
+                    <div class="name">eye</div>
+                    <div class="fontclass">.louie-eye</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-hot"></i>
+                    <div class="name">hot</div>
+                    <div class="fontclass">.louie-hot</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-youtube"></i>
+                    <div class="name">youtube</div>
+                    <div class="fontclass">.louie-youtube</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-trend-o"></i>
+                    <div class="name">trend</div>
+                    <div class="fontclass">.louie-trend-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-friend-o-d"></i>
+                    <div class="name">if_friend</div>
+                    <div class="fontclass">.louie-friend-o-d</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-top-o"></i>
+                    <div class="name">up</div>
+                    <div class="fontclass">.louie-top-o</div>
+                </li>
+            
+                <li>
+                <i class="icon icon louie-instagram"></i>
+                    <div class="name">instagram</div>
+                    <div class="fontclass">.louie-instagram</div>
+                </li>
+            
+        </ul><!-- .icon_lists #-->
+    </div>
+</body>
+</html>
